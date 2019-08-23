@@ -1,0 +1,25 @@
+﻿@model List<StudentManagementSystem.Models.Student>
+@*  //NOTE: The line above is referencing the 'students' (list of students) object that was passed in the 'View' method,
+    //      which is what is returned in the 'index' method inside the 'StudentController' class.
+    //      In order for the computer to use a 'student' object,  *@
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Students</h2>
+@*  //NOTE:   On the line below, we are iterating through each student in the 'students' list.
+    //        each iteration will generate a link with the first name and last name of each student
+    //        in the student list.
+    //NOTE:   These links will take you to dynamic route '/student/details/@student.Id'*@
+@{
+    foreach (var student in Model)
+    {
+        <h2><a href="/student/details/@student.Id">@student.FirstName @student.LastName</a></h2>
+    }
+}
+
+@*//NOTE: This is simply a link that will take you to route '/student/add'. *@
+<a href="/student/add">add</a>

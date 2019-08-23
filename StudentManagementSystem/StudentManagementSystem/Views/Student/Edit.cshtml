@@ -1,0 +1,23 @@
+﻿@model StudentManagementSystem.Models.Student
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@*  //NOTE:   This is plain HTML5 here. We are making a change to the database, so it is an
+    //        HTTP call using the POST method.
+    //NOTE:   Here we didn't use the 'action' attribute in the 'form' tag because .NET framework figures out
+    //        to go to rout "/Student/edit/<Id we are looking at>" and call the 'Edit' method.*@
+<form method="post">
+
+    <!--NOTE:   Here we are having each input textbox with the selected student object property values in them
+                (notice Id input is hidden so it can't be changed by the user). The user will be able to make 
+                edits on that text and submit the form, which will call the 'Edit' method that is waiting for a
+                POST request and a newly edited student object to be transfered and updated to the database.-->
+    <input name="id" value="@Model.Id" hidden />
+    <input name="firstName" value="@Model.FirstName" />
+    <input name="lastName" value="@Model.LastName" />
+    <button type="submit">Edit Student</button>
+</form>

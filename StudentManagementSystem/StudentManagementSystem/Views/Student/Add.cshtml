@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+@*//NOTE:   This is plain HTML5 here. We are making a change to the database, so it is an
+  //        HTTP call using the POST method.
+  //NOTE:   In the 'form' tag blow, we can use the 'action' attribute and have it equal to route "/Student/Add" 
+  //        so that we can call the 'Add' method, but this time after a 'POST' request.
+  //NOTE:   (It is also okay to do '<form method="post">' and the .NET framework figures out 
+  //        to go to rout "/Student/Add" and call the 'Add' method)*@
+<form action="/Student/Add" method="post">
+
+    <!-- NOTE:  The inputs below must be properly named (the keywords 'fisrtName' and 'lastName')
+                because these inputs are tied to student 'FirstName' and 'LastName' Sql parameter
+                place holders, which are needed to insert data into the database (If
+                either of these keywords not spelled correctly, its input won't be captured
+                properly.'
+                 -->
+    <input name="firstName" />
+    <input name="lastName" />
+    <button type="submit">Add Student</button>
+    <!--NOTE:   A button with a "submit" type means it will "post" the form when clicked.
+                Any input values will be sent along with the POST request with the "name"
+                attribute as the key in the key/value pair.-->
+</form>
+
