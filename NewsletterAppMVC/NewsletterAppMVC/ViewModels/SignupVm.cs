@@ -8,6 +8,7 @@ namespace NewsletterAppMVC.ViewModels
     //NOTE: A View Model class naming convention is to end it with 'Vm'. 
     public class SignupVm
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }

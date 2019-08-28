@@ -1,4 +1,4 @@
-﻿using NewsletterAppMVC.ViewModels; //NOTE: To import our 'SignuVm' class.
+﻿using NewsletterAppMVC.Models; //NOTE: now that we moved 'Model1.edmx' to the 'Models' folder, this is needed for 'NewsletterEntities' objects.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +11,6 @@ namespace NewsletterAppMVC.Controllers
     {
         //NOTE: We no longer need the 'connectionString' because entityFramework saved it in a 'Web.config' file.
 
-        //private readonly string connectionString = @"Data Source=DESKTOP-MEVIRUK\SQLEXPRESS;Initial Catalog=Newsletter;Integrated Security=True;
-        //                                            Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;
-        //                                            MultiSubnetFailover=False";
         public ActionResult Index()
         {
             return View();
@@ -48,31 +45,6 @@ namespace NewsletterAppMVC.Controllers
                     db.SaveChanges();
                 }
                 return View("Success");
-            }
-        }
-
-        public ActionResult Admin()
-        {
-            using (NewsletterEntities db = new NewsletterEntities())
-            {
-                //NOTE: Here our, 'db' object has a property called 'SignUps' which represents all of the records
-                //      in our database.
-                var signups = db.SignUps;
-
-                //NOTE: Using 'View Model' is considered best practice in order to map eveything that needs to get
-                //      mapped in the database without having to map it to objects that will be shown in views.
-                //      In our example, SSN is a perfect example of what is important to map, and what is important
-                //      to not show that information to any user.
-                var signupVms = new List<SignupVm>();
-                foreach (var signup in signups)
-                {
-                    var signupVm = new SignupVm();
-                    signupVm.FirstName = signup.FirstName;
-                    signupVm.LastName = signup.LastName;
-                    signupVm.EmailAddress = signup.EmailAddress;
-                    signupVms.Add(signupVm);
-                }
-                return View(signupVms);
             }
         }
 
