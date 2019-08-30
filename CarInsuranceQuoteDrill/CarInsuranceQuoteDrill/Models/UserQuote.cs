@@ -25,5 +25,6 @@ namespace CarInsuranceQuoteDrill.Models
         public string DUI { get; set; }
         public Nullable<int> SpeedingTicketNum { get; set; }
         public string FullCoverageOrLiability { get; set; }
+        public Nullable<decimal> GeneratedQuote { get; set; }
     }
 }

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="UserQuotes">
       <EntityTypeMapping TypeName="CarInsuranceQuoteDrillModel.UserQuote">
         <MappingFragment StoreEntitySet="UserQuotes">
+          <ScalarProperty Name="GeneratedQuote" ColumnName="GeneratedQuote" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastNAme" ColumnName="LastNAme" />

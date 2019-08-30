@@ -15,6 +15,7 @@
     <Property Name="DUI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="SpeedingTicketNum" Type="Int32" />
     <Property Name="FullCoverageOrLiability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GeneratedQuote" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityContainer Name="CarInsuranceQuoteDrillEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="UserQuotes" EntityType="Self.UserQuote" />

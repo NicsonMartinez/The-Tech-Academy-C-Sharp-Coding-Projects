@@ -25,26 +25,27 @@ namespace CarInsuranceQuoteDrill.Controllers
             {
                 using (CarInsuranceQuoteDrillEntities db = new CarInsuranceQuoteDrillEntities())
                 {
-                    UserQuote userQuote = new UserQuote();
+                    UserQuote user = new UserQuote();
 
-                    userQuote.FirstName = firstName;
-                    userQuote.LastNAme = lastName;
-                    userQuote.EmailAddress = emailAddress;
-                    userQuote.DateOfBirth = dateOfBirth;
-                    userQuote.CarMake = carMake;
-                    userQuote.CarYear = carYear;
-                    userQuote.CarModel = carModel;
-                    userQuote.DUI = dui;
-                    userQuote.SpeedingTicketNum = speedingTicketNum;
-                    userQuote.FullCoverageOrLiability = fullCoverageOrLiability;
-
-                    db.UserQuotes.Add(userQuote);
+                    user.FirstName = firstName;
+                    user.LastNAme = lastName;
+                    user.EmailAddress = emailAddress;
+                    user.DateOfBirth = dateOfBirth;
+                    user.CarMake = carMake;
+                    user.CarYear = carYear;
+                    user.CarModel = carModel;
+                    user.DUI = dui;
+                    user.SpeedingTicketNum = speedingTicketNum;
+                    user.FullCoverageOrLiability = fullCoverageOrLiability;
+                    user.GeneratedQuote = QuoteGenerator.GenerateQuote(user);
+                                                         
+                    db.UserQuotes.Add(user);
 
                     db.SaveChanges();
+                    
                 }
             }
             return View();
         }
-
     }
 }
