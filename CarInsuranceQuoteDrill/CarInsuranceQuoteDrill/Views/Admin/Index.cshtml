@@ -1,0 +1,57 @@
+﻿@using CarInsuranceQuoteDrill.ViewModel
+@model List<UserQuoteVm>
+
+
+<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="card-header text-center">
+            <h5 class="m-0">Quotes</h5>
+        </div>
+        <div class="card-body">
+            
+            
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Quote</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var userQuote in Model)
+                    {
+                        <tr>
+                            <th scope="row">@userQuote.Id</th>
+                            <td>@userQuote.FirstName</td>
+                            <td>@userQuote.LastName</td>
+                            <td>@userQuote.EmailAddress</td>
+                            <td>$@userQuote.GeneratedQuote dollars</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+                @*<div class="row mb-3">
+                    <div class="col-2">
+                        @userQuote.FirstName
+                    </div>
+                    <div class="col">
+                        @userQuote.LastName
+                    </div>
+                    <div class="col-5">
+                        @userQuote.EmailAddress
+                    </div>
+                    <div class="col">
+                        @userQuote.GeneratedQuote
+                    </div>
+                </div>*@
+            
+        </div>
+    </div>
+</div>
+

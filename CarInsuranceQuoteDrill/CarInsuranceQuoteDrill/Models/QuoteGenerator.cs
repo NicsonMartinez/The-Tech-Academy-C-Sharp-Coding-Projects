@@ -62,19 +62,19 @@ namespace CarInsuranceQuoteDrill.Models
             }
             else if (userCarYear < 2000 || userCarYear > 2015) //If the car's year is before 2000 or after 2015, add $25 to the monthly total.
             {
-                quoteTotal = +25;
+                quoteTotal += 25;
             }
 
             //If the car's Make is a Porsche, add $25 to the price.
             if (user.CarMake == "Porsche")
             {
-                quoteTotal = +25;
+                quoteTotal += 25;
             }
 
             //If the car's Make is a Porsche and its model is a 911 Carrera, add an additional $25 to the price.
             if (user.CarMake == "Porsche" && user.CarModel == "911 Carrera")
             {
-                quoteTotal = +25;
+                quoteTotal += 25;
             }
 
             //Add $10 to the monthly total for every speeding ticket the user has
@@ -83,19 +83,19 @@ namespace CarInsuranceQuoteDrill.Models
             {
                 userSpeedingTicketNum = 0;
             }
-            quoteTotal = userSpeedingTicketNum * 10;
+            quoteTotal += (userSpeedingTicketNum * 10);
 
 
             //If the user has ever had a DUI, add 25 % to the total.
             if (user.DUI == "Yes")
             {
-                quoteTotal = +(quoteTotal * .25);
+                quoteTotal += (quoteTotal * .25);
             }
 
             //If it's full coverage, add 50% to the total.
             if (user.FullCoverageOrLiability == "Full Coverage")
             {
-                quoteTotal = +(quoteTotal * .50);
+                quoteTotal += (quoteTotal * .50);
             }
 
             decimal quoteTotalInDecimal = Convert.ToDecimal(quoteTotal);

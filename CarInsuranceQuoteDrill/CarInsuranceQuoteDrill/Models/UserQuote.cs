@@ -16,7 +16,7 @@ namespace CarInsuranceQuoteDrill.Models
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string LastNAme { get; set; }
+        public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<int> CarYear { get; set; }

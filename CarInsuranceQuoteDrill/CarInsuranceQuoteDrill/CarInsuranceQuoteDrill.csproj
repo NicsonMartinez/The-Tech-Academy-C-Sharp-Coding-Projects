@@ -135,6 +135,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmptyUser.cs" />
     <Compile Include="Models\QuoteGenerator.cs" />
     <Compile Include="Models\UserQuote1.cs">
       <AutoGen>True</AutoGen>
@@ -155,6 +156,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserQuote.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\UserQuoteVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -240,6 +242,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Quote.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <EntityDeploy Include="Models\UserQuote.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UserQuote.Designer.cs</LastGenOutput>
@@ -247,8 +251,6 @@
     <Content Include="Models\UserQuote.edmx.diagram">
       <DependentUpon>UserQuote.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Home\Quote.cshtml" />
-    <Content Include="Views\Admin\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

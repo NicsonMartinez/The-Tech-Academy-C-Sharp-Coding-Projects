@@ -6,7 +6,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="LastNAme" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="DateOfBirth" Type="date" />
     <Property Name="CarYear" Type="int" />

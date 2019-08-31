@@ -4,10 +4,9 @@
     <EntitySetMapping Name="UserQuotes">
       <EntityTypeMapping TypeName="CarInsuranceQuoteDrillModel.UserQuote">
         <MappingFragment StoreEntitySet="UserQuotes">
-          <ScalarProperty Name="GeneratedQuote" ColumnName="GeneratedQuote" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastNAme" ColumnName="LastNAme" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
           <ScalarProperty Name="CarYear" ColumnName="CarYear" />
@@ -16,6 +15,7 @@
           <ScalarProperty Name="DUI" ColumnName="DUI" />
           <ScalarProperty Name="SpeedingTicketNum" ColumnName="SpeedingTicketNum" />
           <ScalarProperty Name="FullCoverageOrLiability" ColumnName="FullCoverageOrLiability" />
+          <ScalarProperty Name="GeneratedQuote" ColumnName="GeneratedQuote" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
