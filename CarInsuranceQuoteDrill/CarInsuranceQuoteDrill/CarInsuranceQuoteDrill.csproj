@@ -135,7 +135,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmptyUser.cs" />
     <Compile Include="Models\QuoteGenerator.cs" />
     <Compile Include="Models\UserQuote1.cs">
       <AutoGen>True</AutoGen>

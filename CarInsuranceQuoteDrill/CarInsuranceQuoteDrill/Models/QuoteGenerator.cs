@@ -22,6 +22,9 @@ namespace CarInsuranceQuoteDrill.Models
             double quoteTotal = 0;
             double baseTotal = 50;
 
+            //First we add the base total to the quote total to start things off
+            quoteTotal += baseTotal;
+
             //NOTE: All 'user.DateOfBirth', 'user.CarYear', and 'user.SpeedingTicketNum' are object properties
             //      that were declared 'Nullable' which means normally those types cannot be equal to 'null',
             //      but we allowed them to be (by declaring them 'Nullable'). Below you will see that I used 
@@ -42,15 +45,15 @@ namespace CarInsuranceQuoteDrill.Models
 
             if (userAge < 18) //If the user is under 18, add $100 to the monthly total.
             {
-                quoteTotal = baseTotal + 100;
+                quoteTotal += 100;
             }
             else if (userAge > 18 && userAge < 25) //If the user is under 25 (but over 18), add $25 to the monthly total.
             {
-                quoteTotal = baseTotal + 25;
+                quoteTotal += 25;
             }
             else if (userAge > 100) //If the user is over 100, add $25 to the monthly total.
             {
-                quoteTotal = baseTotal + 25;
+                quoteTotal += 25;
             }
 
             int userCarYear = user.CarYear ?? 0;

@@ -1,98 +1,12 @@
 ﻿@model CarInsuranceQuoteDrill.Models.UserQuote
 
-
 @{
     ViewBag.Title = "Get your Car Insurance Quote NOW!";
 }
 
-@*@currentUser.*@
-
 <div class="container">
     <h1>@ViewBag.Title</h1>
-    @*<div class="card-body">
-            @using (Html.BeginForm("Quote", "Home", FormMethod.Post))
-            {
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input class="form-control" type="text" placeholder="First Name" name="FirstName">
-                </div>
-
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input class="form-control" type="text" placeholder="Last Name" name="LastName">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="EmailAddress">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-
-                <div class="form-group">
-                    <label>Date of Birth</label>
-                    <input class="form-control" type="text" placeholder="MM/DD/YYYY" name="DateOfBirth">
-                </div>
-
-                <div class="form-group">
-                    <label>Car Year</label>
-                    <input class="form-control" type="text" placeholder="YYYY" name="CarYear">
-                </div>
-
-                <div class="form-group">
-                    <label>Car Make</label>
-                    <input class="form-control" type="text" placeholder="Car Make" name="CarMake">
-                </div>
-
-                <div class="form-group">
-                    <label>Car Model</label>
-                    <input class="form-control" type="text" placeholder="Car Model" name="CarModel">
-                </div>
-
-                <div class="form-group">
-                    <label>Did you ever have a DUI?</label>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="Yes">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Yes
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="No">
-                        <label class="form-check-label" for="exampleRadios1">
-                            No
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>How many tickets do you have?</label>
-                    <input class="form-control" type="text" placeholder="Number of tickets" name="SpeedingTicketNum">
-                </div>
-
-                <div class="form-group">
-                    <label>Which coverage would you like?</label>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Full Coverage">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Full Coverage
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Liability">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Liability
-                        </label>
-                    </div>
-
-                </div>
-                <button type="submit" class="btn btn-primary">Get Quote!</button>
-            }
-        </div>*@
-    @using (Html.BeginForm("Quote", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
         <div class="row">
             <div class="col-sm-6">
@@ -100,38 +14,38 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="First Name" name="FirstName" value="@Model.FirstName">
+                            <input class="form-control" type="text" placeholder="First Name" name="FirstName" value="@Request.Form["FirstName"]">
                         </div>
 
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Last Name" name="LastName" >
+                            <input class="form-control" type="text" placeholder="Last Name" name="LastName" value="@Request.Form["LastName"]">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="EmailAddress" value="">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="EmailAddress" value="@Request.Form["EmailAddress"]">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 
                         <div class="form-group">
                             <label>Date of Birth</label>
-                            <input class="form-control" type="text" placeholder="MM/DD/YYYY" name="DateOfBirth">
+                            <input class="form-control" type="text" placeholder="MM/DD/YYYY" name="DateOfBirth" value="@Request.Form["DateOfBirth"]">
                         </div>
 
                         <div class="form-group">
                             <label>Car Year</label>
-                            <input class="form-control" type="text" placeholder="YYYY" name="CarYear">
+                            <input class="form-control" type="text" placeholder="YYYY" name="CarYear" value="@Request.Form["CarYear"]">
                         </div>
 
                         <div class="form-group">
                             <label>Car Make</label>
-                            <input class="form-control" type="text" placeholder="Car Make" name="CarMake">
+                            <input class="form-control" type="text" placeholder="Car Make" name="CarMake" value="@Request.Form["CarMake"]">
                         </div>
 
                         <div class="form-group">
                             <label>Car Model</label>
-                            <input class="form-control" type="text" placeholder="Car Model" name="CarModel">
+                            <input class="form-control" type="text" placeholder="Car Model" name="CarModel" value="@Request.Form["CarModel"]">
                         </div>
 
                     </div>
@@ -145,14 +59,14 @@
                             <label>Did you ever have a DUI?</label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="Yes">
+                                <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="Yes" @(Request["DUI"] == "Yes" ? " checked=\"checked\"" : "")>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Yes
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="No">
+                                <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="No" @(Request["DUI"] == "No" ? " checked=\"checked\"" : "")>
                                 <label class="form-check-label" for="exampleRadios1">
                                     No
                                 </label>
@@ -161,39 +75,41 @@
 
                         <div class="form-group">
                             <label>How many tickets do you have?</label>
-                            <input class="form-control" type="text" placeholder="Number of tickets" name="SpeedingTicketNum">
+                            <input class="form-control" type="text" placeholder="Number of tickets" name="SpeedingTicketNum" value="@Request.Form["SpeedingTicketNum"]">
                         </div>
 
                         <div class="form-group">
                             <label>Which coverage would you like?</label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Full Coverage">
+                                <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Full Coverage" @(Request["FullCoverageOrLiability"] == "Full Coverage" ? " checked=\"checked\"" : "")>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Full Coverage
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Liability">
+                                <input class="form-check-input" type="radio" name="FullCoverageOrLiability" id="exampleRadios2" value="Liability" @(Request["FullCoverageOrLiability"] == "Liability" ? " checked=\"checked\"" : "")>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Liability
                                 </label>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary">Get Quote!</button>
+                        <button id="theButton" type="submit" class="btn btn-primary">Get Quote!</button>
+                        <button id="theButton2" type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index","Home")'">Clear</button>
                     </div>
                     <div class="card-body">
-                        <h1>
-                            @Model.GeneratedQuote
-                        </h1>
+                        <div>
+                            @if (HttpContext.Current.Request.HttpMethod == "POST")
+                            {
+                                <p>Your estimated quote is: </p>
+                                <h1>$@ViewBag.Quote/m</h1>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     }
-
-
-
 </div>

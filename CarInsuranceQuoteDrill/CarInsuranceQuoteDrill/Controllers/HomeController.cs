@@ -8,29 +8,16 @@ using System.Web.Mvc;
 namespace CarInsuranceQuoteDrill.Controllers
 {
     public class HomeController : Controller
-    {        
-        public ActionResult Index(int? Id = null )
+    {   
+        public ActionResult Index()
         {
-            UserQuote currentUser = EmptyUser.EmptyUserMethod();
-            if (Id == null)
-                return View(currentUser);
-            else
-                
-                using (CarInsuranceQuoteDrillEntities db = new CarInsuranceQuoteDrillEntities())
-                {
-                currentUser = db.UserQuotes.Where(x => x.Id == Id).ToList()[0];
-                
-                }
-                return View(currentUser);
-
+            return View();
         }
+
         [HttpPost]
-        public ActionResult Quote(string firstName, string lastName, string emailAddress, DateTime dateOfBirth, int carYear,
+        public ActionResult Index(string firstName, string lastName, string emailAddress, DateTime dateOfBirth, int carYear,
                                   string carMake, string carModel, string dui, int speedingTicketNum, string fullCoverageOrLiability)
         {
-
-            UserQuote user = new UserQuote();
-
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress))
             {
                 return View("~/Views/Shared/Error.cshtml");
@@ -39,7 +26,7 @@ namespace CarInsuranceQuoteDrill.Controllers
             {
                 using (CarInsuranceQuoteDrillEntities db = new CarInsuranceQuoteDrillEntities())
                 {
-
+                    UserQuote user = new UserQuote();
 
                     user.FirstName = firstName;
                     user.LastName = lastName;
@@ -56,12 +43,12 @@ namespace CarInsuranceQuoteDrill.Controllers
                     db.UserQuotes.Add(user);
 
                     db.SaveChanges();
-                    ViewBag.UserEntry = "Hello World";        
+
+                    //NOTE: Here I am using a ViewBag to store the quote generated so I can use it in 
+                    ViewBag.Quote = user.GeneratedQuote;        
                 }
             }
-
-            
-            return RedirectToAction("Index", new { Id = user.Id });
+            return View();
         }
     }
 }
