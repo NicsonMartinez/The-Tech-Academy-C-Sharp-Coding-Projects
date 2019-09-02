@@ -241,7 +241,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\Quote.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <EntityDeploy Include="Models\UserQuote.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -12,5 +12,6 @@ namespace CarInsuranceQuoteDrill.ViewModel
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public Nullable<decimal> GeneratedQuote { get; set; }
+        public Nullable<System.DateTime> DateAndTime { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿@using CarInsuranceQuoteDrill.ViewModel
+﻿@*NOTE: The object I am passing in is a list of 'UserQuoteVm' objects. In order for this view to recognize
+    that 'model' class (the 'UserQuoteVm' class), 'CarInsuranceQuoteDrill.ViewModel' needs to be used/imported.*@
+@using CarInsuranceQuoteDrill.ViewModel
 @model List<UserQuoteVm>
-
 
 <div class="row no-gutters m-3">
     <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
@@ -8,8 +9,8 @@
             <h5 class="m-0">Quotes</h5>
         </div>
         <div class="card-body">
-            
-            
+
+
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -18,6 +19,8 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Quote</th>
+                        <th scope="col">Date & Time
+                        <th>
                     </tr>
                 </thead>
 
@@ -30,27 +33,11 @@
                             <td>@userQuote.LastName</td>
                             <td>@userQuote.EmailAddress</td>
                             <td>$@userQuote.GeneratedQuote dollars</td>
+                            <td>@userQuote.DateAndTime</td>
                         </tr>
                     }
                 </tbody>
             </table>
-
-
-                @*<div class="row mb-3">
-                    <div class="col-2">
-                        @userQuote.FirstName
-                    </div>
-                    <div class="col">
-                        @userQuote.LastName
-                    </div>
-                    <div class="col-5">
-                        @userQuote.EmailAddress
-                    </div>
-                    <div class="col">
-                        @userQuote.GeneratedQuote
-                    </div>
-                </div>*@
-            
         </div>
     </div>
 </div>

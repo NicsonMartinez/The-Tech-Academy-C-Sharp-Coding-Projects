@@ -16,6 +16,7 @@
     <Property Name="SpeedingTicketNum" Type="int" />
     <Property Name="FullCoverageOrLiability" Type="varchar" MaxLength="50" />
     <Property Name="GeneratedQuote" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DateAndTime" Type="datetime" />
   </EntityType>
   <EntityContainer Name="CarInsuranceQuoteDrillModelStoreContainer">
     <EntitySet Name="UserQuotes" EntityType="Self.UserQuotes" Schema="dbo" store:Type="Tables" />

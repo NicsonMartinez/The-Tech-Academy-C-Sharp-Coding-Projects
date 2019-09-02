@@ -26,5 +26,6 @@ namespace CarInsuranceQuoteDrill.Models
         public Nullable<int> SpeedingTicketNum { get; set; }
         public string FullCoverageOrLiability { get; set; }
         public Nullable<decimal> GeneratedQuote { get; set; }
+        public Nullable<System.DateTime> DateAndTime { get; set; }
     }
 }

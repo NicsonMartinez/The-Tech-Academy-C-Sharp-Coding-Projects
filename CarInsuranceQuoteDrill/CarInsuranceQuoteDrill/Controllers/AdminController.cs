@@ -1,5 +1,5 @@
 ﻿using CarInsuranceQuoteDrill.Models; //NOTE: This is needed for 'CarInsuranceQuoteDrillEntities' databse objects.
-using CarInsuranceQuoteDrill.ViewModel; //NOTE: this is to have access to 'userQuoteVm'
+using CarInsuranceQuoteDrill.ViewModel; //NOTE: this is to have access to 'userQuoteVm'.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,7 @@ namespace CarInsuranceQuoteDrill.Controllers
                     userQuoteVm.LastName = userQuote.LastName;
                     userQuoteVm.EmailAddress = userQuote.EmailAddress;
                     userQuoteVm.GeneratedQuote = userQuote.GeneratedQuote;
+                    userQuoteVm.DateAndTime = userQuote.DateAndTime;
                     userQuoteVms.Add(userQuoteVm);
                 }
             }

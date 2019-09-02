@@ -14,6 +14,9 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>First Name</label>
+                            @*//NOTE:   My goal was for the form to keep values entered intact after submitting the form using the Post method and
+                                        re-rendering that same form(They call it postbacks). I found this approach in this link:
+                                        https://docs.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/4-working-with-forms*@
                             <input class="form-control" type="text" placeholder="First Name" name="FirstName" value="@Request.Form["FirstName"]">
                         </div>
 
@@ -57,8 +60,18 @@
 
                         <div class="form-group">
                             <label>Did you ever have a DUI?</label>
-
+                 
                             <div class="form-check">
+                                @*//NOTE:   Here is a forum that lead me to find out how to restore radio button values after a post method:
+                                            https://forums.asp.net/t/1625091.aspx*@
+                                @*//NOTE:   The code, '@(Request["DUI"] == "Yes" ? " checked=\"checked\"" : "")' uses the conditional 
+                                            operator '?:', which is known as the ternary conditional operator, and it is enclosed in an 
+                                            'Explicit Razor Expression', which consist of an '@' symbol with balanced parenthesis - Any content
+                                            within the @() parenthesis is evaluated and rendered to the output. 
+                                  //NOTE:   The goal of the code is to render string 'checked="checked"' or "" (an empty string) inside of the <input> tag. Below, If the 
+                                            request after the POST method on input with name="DUI" ( meaning, Request["DUI"] ) evaluates to "YES" then Razor   
+                                            tag will reneder to 'checked="checked"' but if it evaluates to any other value (it returns false), then "" gets rendered.
+                                            *@
                                 <input class="form-check-input" type="radio" name="DUI" id="exampleRadios1" value="Yes" @(Request["DUI"] == "Yes" ? " checked=\"checked\"" : "")>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Yes
@@ -101,6 +114,7 @@
                     </div>
                     <div class="card-body">
                         <div>
+                            @*//NOTE: Here I wanted The tags below which reflect what the quote is, to only appear after a Post request.*@
                             @if (HttpContext.Current.Request.HttpMethod == "POST")
                             {
                                 <p>Your estimated quote is: </p>

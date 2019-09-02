@@ -38,13 +38,19 @@ namespace CarInsuranceQuoteDrill.Controllers
                     user.DUI = dui;
                     user.SpeedingTicketNum = speedingTicketNum;
                     user.FullCoverageOrLiability = fullCoverageOrLiability;
+
+                    //NOTE: Here I am using a 'QuoteGenerator' class that I created which has a method called, 'GenerateQuote'
+                    //      which passes in a parameter 'UserQuote' object, calculates and returnd a quote value represented  
+                    //      as 'decimal' type, and gets stored into 'user' property, 'GeneratedQuote'.
                     user.GeneratedQuote = QuoteGenerator.GenerateQuote(user);
+                    user.DateAndTime = DateTime.Now;
                                                          
                     db.UserQuotes.Add(user);
 
                     db.SaveChanges();
 
-                    //NOTE: Here I am using a ViewBag to store the quote generated so I can use it in 
+                    //NOTE: Here I am using a 'ViewBag' to store the quote generated so I can use imediately use it in my view,
+                    //      to be able to show the user the quote.
                     ViewBag.Quote = user.GeneratedQuote;        
                 }
             }
