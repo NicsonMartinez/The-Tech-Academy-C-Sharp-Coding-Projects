@@ -12,3 +12,6 @@ C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projec
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.pdb
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.Migrations.InitialCreate.resources
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.csproj.GenerateResource.cache
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.Migrations.AddUrl.resources
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.Migrations.AddUser.resources
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\CodeFirstNewDatabaseSample\CodeFirstNewDatabaseSample\obj\Debug\CodeFirstNewDatabaseSample.Migrations.ChangeDisplayName.resources

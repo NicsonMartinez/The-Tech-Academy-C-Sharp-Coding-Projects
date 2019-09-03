@@ -2,6 +2,10 @@
 using System.Data.Entity; //NOTE: This is needed to use base class 'DbContext' (Entity Framwork is needed to use 'System.Data.Entity').
 using System.Linq; //NOTE: This is needed for IOrderedQueryable<Blog> type.
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations; //NOTE: It is needed to uniquely identify and entity in our class model. ([Key] inside of the 'User' class)
+
+//NOTE: For this project I followed a tutorial from the microsoft websote called, "Code First to a New Database".
+//      https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/workflows/new-database
 
 namespace CodeFirstNewDatabaseSample
 {
@@ -42,6 +46,15 @@ namespace CodeFirstNewDatabaseSample
     {
         public int BlogId { get; set; }
         public string Name { get; set; }
+        public string Url { get; set; }
+    }
+
+    public class User
+    {
+
+        [Key] //NOTE: Here we ase using this '[Key]' annotation on the 'UserName' property.
+        public string UserName { get; set; }
+        public string DisplayName { get; set; }
     }
 
     public class Post
@@ -67,6 +80,19 @@ namespace CodeFirstNewDatabaseSample
         //NOTE: This DbSet, allows us to query inside instances of those types ('Blog' and 'Post').
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        //NOTE: Here I am using 'Fluent API' in order to change the column that the 'DisplayName' property 
+        //      of 'Users' is met to, to be called 'display_name'. We accomplish this by using the 
+        //      'OnModelCreating' method
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //NOTE: First we start with the entity we want to configure, in our case is user.
+            modelBuilder.Entity<User>()
+                .Property(u => u.DisplayName) //NOTE: Here I want to identify That I want to configure the 'DisplayName' property.
+                .HasColumnName("display_name"); 
+                //NOTE: There are many things we can change but in this exercise we are changing the Column name on the database.
+        }
     }
 
 }
