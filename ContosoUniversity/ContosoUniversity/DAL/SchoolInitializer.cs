@@ -2,13 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
+using System.Data.Entity; //NOTE: This is needed for 'DropCreateDatabaseIfModelChanges<SchoolContext>'.
 using ContosoUniversity.Models;
 
 namespace ContosoUniversity.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext>
+    /*NOTE: Entity Framework can automatically create (or drop and re-create) a database for you when the application runs. 
+     *      You can specify that this should be done every time your application runs or only when the model is out of sync with 
+     *      the existing database. You can also write a Seed method that Entity Framework automatically calls after creating 
+     *      the database in order to populate it with test data.*/
+
+    /*NOTE: The default behavior is to create a database only if it doesn't exist (and throw an exception if the model has 
+     *      changed and the database already exists). In this section, you'll specify that the database should be dropped and 
+     *      re-created whenever the model changes. Dropping the database causes the loss of all your data. This is generally 
+     *      okay during development, because the Seed method will run when the database is re-created and will re-create your 
+     *      test data. But in production you generally don't want to lose all your data every time you need to change the 
+     *      database schema. Later you'll see how to handle model changes by using Code First Migrations to change the database 
+     *      schema instead of dropping and re-creating the database.*/
+    public class SchoolInitializer : DropCreateDatabaseIfModelChanges<SchoolContext>
     {
+        /*NOTE: The 'Seed' method takes the database context object as an input parameter, and the code in the method uses 
+         *      that object to add new entities to the database. For each entity type, the code creates a collection of new 
+         *      entities, adds them to the appropriate 'DbSet' property, and then saves the changes to the database. It isn't 
+         *      necessary to call the 'SaveChanges' method after each group of entities, as is done here, but doing that helps 
+         *      you locate the source of a problem if an exception occurs while the code is writing to the database.*/
         protected override void Seed(SchoolContext context)
         {
             var students = new List<Student>
