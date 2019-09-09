@@ -68,17 +68,24 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Students.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Students.Add(student);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
             return View(student);
         }
 
-        // GET: Student/Edit/5
+        //GET: Student/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,28 +100,94 @@ namespace ContosoUniversity.Controllers
             return View(student);
         }
 
+       
+
         // POST: Student/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,EnrollmentDate")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(student);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,EnrollmentDate")] Student student)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(student).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(student);
+        //}
 
-        // GET: Student/Delete/5
-        public ActionResult Delete(int? id)
+        //NOTE: The code commented above was replaced by the code below.
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var studentToUpdate = db.Students.Find(id);
+            if (TryUpdateModel(studentToUpdate, "",
+               new string[] { "LastName", "FirstMidName", "EnrollmentDate" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(studentToUpdate);
+        }
+
+        /*NOTE: These changes (above) implement a security best practice to prevent overposting, The scaffolder generated a Bind attribute 
+         *      and added the entity created by the model binder to the entity set with a Modified flag. That code is no longer recommended  
+         *      because the Bind attribute clears out any pre-existing data in fields not listed in the Include parameter. In the future, 
+         *      the MVC controller scaffolder will be updated so that it doesn't generate Bind attributes for Edit methods.
+
+         *      The new code reads the existing entity and calls TryUpdateModel to update fields from user input in the posted form data. 
+         *      The Entity Framework's automatic change tracking sets the EntityState.Modified flag on the entity. When the SaveChanges 
+         *      method is called, the Modified flag causes the Entity Framework to create SQL statements to update the database row. 
+         *      Concurrency conflicts are ignored, and all columns of the database row are updated, including those that the user didn't 
+         *      change. (A later tutorial shows how to handle concurrency conflicts, and if you only want individual fields to be updated 
+         *      in the database, you can set the entity to EntityState.Unchanged and set individual fields to EntityState.Modified.)
+
+         *      To prevent overposting, the fields that you want to be updateable by the Edit page are whitelisted in the TryUpdateModel 
+         *      parameters. Currently there are no extra fields that you're protecting, but listing the fields that you want the model 
+         *      binder to bind ensures that if you add fields to the data model in the future, they're automatically protected until you 
+         *      explicitly add them here.
+
+         *      As a result of these changes, the method signature of the HttpPost Edit method is the same as the HttpGet edit method; 
+         *      therefore you've renamed the method EditPost.         
+         */
+
+
+
+
+        /*NOTE: As noted, the 'HttpGet' 'Delete' method (below) doesn't delete the data. Performing a delete operation in response
+         *      to a GET request (or for that matter, performing any edit operation, create operation, or any other 
+        *      operation that changes data) creates a security risk. For more information, see 
+        *      'ASP.NET MVC Tip #46 — Don't use Delete Links because they create Security Holes' on Stephen Walther's blog:
+        *      http://stephenwalther.com/archive/2009/01/21/asp-net-mvc-tip-46-ndash-donrsquot-use-delete-links-because
+        */
+
+        // GET: Student/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError=false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             Student student = db.Students.Find(id);
             if (student == null)
@@ -124,17 +197,45 @@ namespace ContosoUniversity.Controllers
             return View(student);
         }
 
+        /*NOTE: This code (above) accepts an optional parameter that indicates whether the method was called after a failure  
+         *      to save changes. This parameter is 'false' when the 'HttpGet' 'Delete' method is called without a previous failure.  
+         *      When it is called by the 'HttpPost' 'Delete' method ('DeleteConfirmed' method below) in response to a database 
+         *      update error, the parameter is true and an error message is passed to the view.
+         */
+
         // POST: Student/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
-            db.SaveChanges();
+            try
+            {
+                //Student student = db.Students.Find(id);
+                //db.Students.Remove(student);
+                
+                /*NOTE: If improving performance in a high-volume application is a priority, you could avoid an unnecessary 
+                 * SQL query to retrieve the row by replacing the lines of code that call the 'Find' and 'Remove' methods  
+                 * from the commented code above with the following code:*/
+                Student studentToDelete = new Student() { ID = id };
+                db.Entry(studentToDelete).State = EntityState.Deleted;
+                /*NOTE: This code (above) instantiates a Student entity using only the primary key value and then sets the 
+                 *      entity state to Deleted. That's all that the Entity Framework needs in order to delete the entity.*/
+
+                db.SaveChanges();
+            }
+            catch (DataException/* dex*/)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 
+
+        /*NOTE: To close database connections and free up the resources they hold as soon as possible, dispose the context 
+         *      instance when you are done with it. That is why the scaffolded code provides a Dispose method at the end 
+         *      of this StudentController class in StudentController.cs, as shown in the code below:
+         */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

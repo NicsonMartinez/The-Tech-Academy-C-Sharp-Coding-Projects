@@ -9,32 +9,70 @@
 <div>
     <h4>Student</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+    @*NOTE: Everything enclosed in the 'Description List' <dl> tags are 'description terms' <dt> and the '<dd>' tags
+            are what describe the description terms. Inside a <dd> tag you can put paragraphs, line breaks, images, 
+            links, lists, tables etc.*@
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstMidName)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.FirstMidName)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.EnrollmentDate)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.EnrollmentDate)
+    </dd>
+
+
+    @*NOTE: This code loops through the entities in the 'Enrollments' 'navigation property'. For each 'Enrollment' entity in the property,
+        it displays the course title and the grade. The course title is retrieved from the 'Course' entity that's stored in the 'Course'
+        'navigation property' of the 'Enrollments' entity. All of this data is retrieved from the database automatically when it's needed.
+        In other words, you are using 'lazy loading' here. You did not specify 'eager loading' for the 'Courses' navigation property,
+        so the enrollments were not retrieved in the same query that got the students. Instead, the first time you try to access the
+        Enrollments navigation property, a new query is sent to the database to retrieve the data. You can read more about 'lazy loading'
+        and 'eager loading' in the Reading Related Data tutorial later in this series:
+        https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application
         
-    </dl>
+    *@
+    <dt>
+        @Html.DisplayNameFor(model => model.Enrollments)
+    </dt>
+    <dd>
+        <table class="table">
+            <tr>
+                <th>Course Title</th>
+                <th>Grade</th>
+            </tr>
+            @foreach (var item in Model.Enrollments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                </tr>
+            }
+        </table>
+    </dd>
+
+
+</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

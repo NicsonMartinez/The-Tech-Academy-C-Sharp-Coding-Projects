@@ -10,19 +10,26 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    <tr> 
         <th>
+            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'LastName'.*@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
+            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'FirstMidName'.*@
             @Html.DisplayNameFor(model => model.FirstMidName)
         </th>
         <th>
+            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'EnrollmentDate'.*@
             @Html.DisplayNameFor(model => model.EnrollmentDate)
         </th>
         <th></th>
     </tr>
 
+@*NOTE: Below is a 'foreach' loop which will iterate through all the 'Student' objects and will display the student's
+        'LastName', 'FirstMidName', 'EnrollmentDate' & and links be able to edit, see the details, or delete that 
+        current student in the iteration. It will create 'table rows' (<tr>) for as many student objects are in the 
+        database model.*@
 @foreach (var item in Model) {
     <tr>
         <td>
