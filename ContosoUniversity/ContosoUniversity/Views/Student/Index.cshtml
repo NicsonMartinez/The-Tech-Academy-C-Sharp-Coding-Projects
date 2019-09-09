@@ -9,44 +9,56 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@*NOTE: This code below simply creates the outline of the search textbox and submit button. *@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
-    <tr> 
+
+    <tr>
+        @*NOTE: This code uses the information in the ViewBag properties to set up hyperlinks with the appropriate query string values.
+            See the logic in the 'Index' method in the 'StudentController' class under 'StudentController.cs', in the 'Controllers'
+            folder.*@
         <th>
-            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'LastName'.*@
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'FirstMidName'.*@
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            First Name
         </th>
         <th>
-            @*NOTE: This 'table header' (<th>) enclosed in 'table row' (<tr>) will render model name, 'EnrollmentDate'.*@
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th></th>
     </tr>
 
-@*NOTE: Below is a 'foreach' loop which will iterate through all the 'Student' objects and will display the student's
-        'LastName', 'FirstMidName', 'EnrollmentDate' & and links be able to edit, see the details, or delete that 
-        current student in the iteration. It will create 'table rows' (<tr>) for as many student objects are in the 
+    @*NOTE: Below is a 'foreach' loop which will iterate through all the 'Student' objects and will display the student's
+        'LastName', 'FirstMidName', 'EnrollmentDate' & and links be able to edit, see the details, or delete that
+        current student in the iteration. It will create 'table rows' (<tr>) for as many student objects are in the
         database model.*@
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstMidName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnrollmentDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstMidName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

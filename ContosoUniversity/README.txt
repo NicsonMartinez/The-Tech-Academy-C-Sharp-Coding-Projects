@@ -1,1 +1,1 @@
-Please use Visual Studio 2017 for this one.
+Visual Studio 2017 or 2019 are okay to use (I am currently using 2019). 
