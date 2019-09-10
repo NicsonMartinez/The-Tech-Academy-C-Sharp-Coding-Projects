@@ -1,20 +1,43 @@
-﻿@model IEnumerable<ContosoUniversity.Models.Student>
+﻿@*@model IEnumerable<ContosoUniversity.Models.Student>*@
+
+@model PagedList.IPagedList<ContosoUniversity.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@*NOTE: The @model statement at the top of the page specifies that the view now gets a 'PagedList' object instead of a 'List' object.
+    The 'using' statement for 'PagedList.Mvc' gives access to the MVC helper for the paging buttons.*@
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
-<h2>Index</h2>
+<h2>Students</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
 @*NOTE: This code below simply creates the outline of the search textbox and submit button. *@
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }*@
+
+
+@*NOTE: The code below uses an overload of 'BeginForm' that allows it to specify 'FormMethod.Get'.
+    NOTE: The default, 'BeginForm' submits form data with a POST, which means that parameters are passed in the HTTP message body
+          and not in the URL as query strings. When you specify HTTP GET, the form data is passed in the URL as query strings,
+          which enables users to bookmark the URL. The 'W3C guidelines for the use of HTTP GET' recommend that you should use
+          GET when the action does not result in an update: https://www.w3.org/2001/tag/doc/whenToUseGet.html*@
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        @*NOTE: The text box is initialized with the current search string so when you click a new page you can see the current search string.*@
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
@@ -25,14 +48,16 @@
         @*NOTE: This code uses the information in the ViewBag properties to set up hyperlinks with the appropriate query string values.
             See the logic in the 'Index' method in the 'StudentController' class under 'StudentController.cs', in the 'Controllers'
             folder.*@
+        @*NOTE: The column header links use the query string to pass the current search string to the controller so that the user can
+            sort within filter results:*@
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             First Name
         </th>
         <th>
-            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -62,3 +87,16 @@
     }
 
 </table>
+<br />
+@*NOTE: Here the current page and total number of pages are displayed.*@
+@*NOTE: If there are no pages to display, "Page 0 of 0" is shown. (In that case the page number is greater than the
+    page count because 'Model.PageNumber' is 1, and 'Model.PageCount' is 0.)*@
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@*NOTE: The paging buttons are displayed by the 'PagedListPager' helper as shown below.*@
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+@*NOTE: The 'PagedListPager' helper provides a number of options that you can customize, including URLs and styling.
+    For more information, see 'TroyGoode / PagedList' on the GitHub site:
+    https://github.com/TroyGoode/PagedList //NOTE: No longer maintained..
+    https://github.com/dncuug/X.PagedList //NOTE: maintained as of 2019*@

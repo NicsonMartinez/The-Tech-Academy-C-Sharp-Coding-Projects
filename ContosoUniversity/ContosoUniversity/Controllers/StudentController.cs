@@ -43,8 +43,15 @@ namespace ContosoUniversity.Controllers
         //    return View(db.Students.ToList());
         //}
 
-        public ActionResult Index(string sortOrder)
+        //NOTE: This code adds a 'page' parameter, a current sort order parameter, and a current filter parameter to the method signature:
+        /*NOTE: The first time the page is displayed, or if the user hasn't clicked a paging or sorting link, all the parameters are null. 
+         *      If a paging link is clicked, the 'page' variable contains the page number to display.*/
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            /*NOTE: A ViewBag property provides the view with the current sort order, because this must be included in the 
+             *      paging links in order to keep the sort order the same while paging:*/
+            ViewBag.CurrentSort = sortOrder;
+
             //NOTE: Here We are saying if the url shows 'http://localhost:51086/Student', that means sortOrder is 'null'
             //      which means at that point (right after that request) LastName is in ascending order (by default). When the user
             //      clicks on the 'LastName' ActionLink, the user wants to turn it from ascending to descending order. That's why
@@ -60,13 +67,38 @@ namespace ContosoUniversity.Controllers
             //      order. Before the user clicks it again, the value in ViewBag.DateSortParm has already changed to "date_desc" becuase \
             //      sortOrder == "Date" equated to 'true'. After the user clicks that ActionLink again it the url will show 
             //      'http://localhost:51086/Student?sortOrder=date_desc' and the list will be shown in descending order.
-
+            //NOTE: Basically the url pattern changes on one link or another depending on what was clicked prior.
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
-            //NOTE: Basically the url pattern changes on one linkor another depending on what was clicked prior.
+            /*NOTE: The 'ViewBag.CurrentFilter' provides the view with the current filter string. This value must be included 
+             *      in the paging links in order to maintain the filter settings during paging, and it must be restored to the text box when the 
+             *      page is redisplayed. If the search string is changed during paging, the page has to be reset to 1, because the new filter can 
+             *      result in different data to display. The search string is changed when a value is entered in the text box and the submit button 
+             *      is pressed. In that case, the searchString parameter is not null.*/
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
 
             var students = from s in db.Students
                            select s;
+
+            /*NOTE: The code adds a searchString parameter to the Index method. The search string value is received from a text 
+             *      box that you'll add to the Index view. It also adds a where clause to the LINQ statement that selects only 
+             *      students whose first name or last name contains the search string. The statement that adds the Where clause 
+             *      executes only if there's a value to search for.*/
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstMidName.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -82,7 +114,16 @@ namespace ContosoUniversity.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            return View(students.ToList());
+            //return View(students.ToList());
+
+            //NOTE: This is where we set how many queried table rows we want to show per page.
+            int pageSize = 4;
+
+            /*NOTE: The ToPagedList extension method on the students IQueryable object below converts the student 
+             *      query to a single page of students in a collection type that supports paging. That single page of students is then 
+             *      passed to the view:*/
+            int pageNumber = (page ?? 1); //NOTE: Assign 'page' to 'pageNumber' but, if 'page' is null, then assign 1 to 'pageNumber'.
+            return View(students.ToPagedList(pageNumber, pageSize));
         }
 
 
@@ -280,8 +321,7 @@ namespace ContosoUniversity.Controllers
 
         /*NOTE: To close database connections and free up the resources they hold as soon as possible, dispose the context 
          *      instance when you are done with it. That is why the scaffolded code provides a Dispose method at the end 
-         *      of this StudentController class in StudentController.cs, as shown in the code below:
-         */
+         *      of this StudentController class in StudentController.cs, as shown in the code below:*/
         protected override void Dispose(bool disposing)
         {
             if (disposing)

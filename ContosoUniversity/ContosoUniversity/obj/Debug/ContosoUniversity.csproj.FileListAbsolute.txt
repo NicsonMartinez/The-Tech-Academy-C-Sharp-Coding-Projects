@@ -78,3 +78,7 @@ C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projec
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\EntityFramework.SqlServer.dll
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\EntityFramework.xml
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\EntityFramework.SqlServer.xml
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.dll
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.Mvc.dll
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.xml
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.Mvc.xml
