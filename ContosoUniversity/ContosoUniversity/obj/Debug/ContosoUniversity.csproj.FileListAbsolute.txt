@@ -82,3 +82,8 @@ C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projec
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.Mvc.dll
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.xml
 C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\bin\PagedList.Mvc.xml
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\obj\Debug\ContosoUniversity.Migrations.InitialCreate.resources
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\obj\Debug\ContosoUniversity.csproj.GenerateResource.cache
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\obj\Debug\ContosoUniversity.Migrations.ColumnFirstName.resources
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\obj\Debug\ContosoUniversity.Migrations.StudentRequiredFieldsAndNewProperty.resources
+C:\Users\Nicson Martinez\Documents\GitHub\The-Tech-Academy-C-Sharp-Coding-Projects\ContosoUniversity\ContosoUniversity\obj\Debug\ContosoUniversity.Migrations.ComplexDataModel.resources

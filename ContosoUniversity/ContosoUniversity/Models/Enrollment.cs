@@ -1,4 +1,6 @@
-﻿namespace ContosoUniversity.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ContosoUniversity.Models
 {
     public enum Grade
     {
@@ -22,6 +24,9 @@
          *      (unlike the Student.Enrollments navigation property [in the 'Student' class] you saw earlier, which can hold 
          *      multiple Enrollment entities).*/
         public int StudentID { get; set; }
+
+        //
+        [DisplayFormat(NullDisplayText = "No grade")]
 
         /*NOTE: The Grade property is an enum. The question mark after the Grade type declaration indicates that the Grade property 
          *      is nullable. A grade that's null is different from a zero grade — null means a grade isn't known or hasn't been 
